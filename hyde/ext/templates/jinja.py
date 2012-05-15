@@ -171,7 +171,7 @@ def syntax(env, value, lexer=None, filename=None):
     try:
         import pygments
         from pygments import lexers
-        from pygments import formatters
+        from hyde.lib.pygments import formatters
     except ImportError:
         logger.error(u"pygments library is required to"
                         " use syntax highlighting tags.")
@@ -186,7 +186,7 @@ def syntax(env, value, lexer=None, filename=None):
                             'options',
                             Expando({})).to_dict()
 
-    formatter = formatters.HtmlFormatter(**settings)
+    formatter = formatters.HydeHtmlFormatter(**settings)
     code = pygments.highlight(value, pyg, formatter)
     code = code.replace('\n\n', '\n&nbsp;\n').replace('\n', '<br />')
     caption = filename if filename else pyg.name
